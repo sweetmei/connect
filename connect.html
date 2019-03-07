@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/react/16.4.2/react.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+</head>
+<body>
+    <div id="box"></div>
+    <script type="text/babel">
+    
+       
+        class Index extends React.Component{
+            render(){
+                return <div>组件</div>
+            }
+        }
+        function connect(cbk1) {
+            const students = {
+                '庞再美':{
+                    age: '22',
+                    sex: '女'
+                },
+                '庞再峰':{
+                    age: '24',
+                    sex: '男'
+                }
+            }
+            let res=cbk1(students)
+           return (Index)=>{
+               return class extends React.Component{
+                   render(){
+                       return <div>
+                        <Index/>
+                        </div>
+                   }
+               }
+           }
+        }
+        let newDom=connect((msg)=>{
+            return msg['庞再美']
+        })(Index)
+        ReactDOM.render(
+            <newDom/>,
+            document.getElementById("box")
+        )
+        </script>
+</body>
+</html>
